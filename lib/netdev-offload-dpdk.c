@@ -1370,6 +1370,184 @@ parse_flow_tnl_match(struct netdev *tnldev,
     return ret;
 }
 
+static void
+print_flow(struct flow *flow)
+{
+    // struct ds ds = DS_EMPTY_INITIALIZER;
+    if (!is_all_zeros(&flow->tunnel, sizeof(struct flow_tnl))) {
+        VLOG_DBG("flow->tunnel not zero");
+    }
+
+    if (!is_all_zeros(&flow->metadata, sizeof(ovs_be64))) {
+        VLOG_DBG("flow->metadata not zero");
+    }
+
+    if (!is_all_zeros(flow->regs, sizeof(uint32_t) * 16)) {
+        VLOG_DBG("flow->regs not zero");
+    }
+
+    if (!is_all_zeros(&flow->skb_priority, sizeof(uint32_t))) {
+        VLOG_DBG("flow->skb_priority not zero");
+    }
+
+    if (!is_all_zeros(&flow->pkt_mark, sizeof(uint32_t))) {
+        VLOG_DBG("flow->pkt_mark not zero");
+    }
+
+    if (!is_all_zeros(&flow->dp_hash, sizeof(uint32_t))) {
+        VLOG_DBG("flow->dp_hash not zero");
+    }
+
+    if (!is_all_zeros(&flow->in_port, sizeof(uint32_t))) {
+        VLOG_DBG("flow->in_port not zero");
+    }
+
+    if (!is_all_zeros(&flow->recirc_id, sizeof(uint32_t))) {
+        VLOG_DBG("flow->recirc_id not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_state, sizeof(uint8_t))) {
+        VLOG_DBG("flow->ct_state not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_nw_proto, sizeof(uint8_t))) {
+        VLOG_DBG("flow->ct_nw_proto not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_zone, sizeof(uint16_t))) {
+        VLOG_DBG("flow->ct_zone not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_mark, sizeof(uint32_t))) {
+        VLOG_DBG("flow->ct_mark not zero");
+    }
+
+    if (!is_all_zeros(&flow->packet_type, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->packet_type not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_label, sizeof(ovs_u128))) {
+        VLOG_DBG("flow->ct_label not zero");
+    }
+
+    if (!is_all_zeros(&flow->conj_id, sizeof(uint32_t))) {
+        VLOG_DBG("flow->conj_id not zero");
+    }
+
+    if (!is_all_zeros(&flow->actset_output, sizeof(uint32_t))) {
+        VLOG_DBG("flow->actset_output not zero");
+    }
+
+    if (!is_all_zeros(&flow->dl_dst, sizeof(struct eth_addr))) {
+        VLOG_DBG("flow->dl_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->dl_src, sizeof(struct eth_addr))) {
+        VLOG_DBG("flow->dl_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->dl_type, sizeof(ovs_be16))) {
+        VLOG_DBG("flow->dl_type not zero");
+    }
+
+    if (!is_all_zeros(flow->vlans, sizeof(uint32_t) * 2)) {
+        VLOG_DBG("flow->vlans not zero");
+    }
+
+    if (!is_all_zeros(&flow->nw_src, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->nw_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->nw_dst, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->nw_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_nw_src, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->ct_nw_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_nw_dst, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->ct_nw_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->ipv6_src, sizeof(struct in6_addr))) {
+        VLOG_DBG("flow->ipv6_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->ipv6_dst, sizeof(struct in6_addr))) {
+        VLOG_DBG("flow->ipv6_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_ipv6_src, sizeof(struct in6_addr))) {
+        VLOG_DBG("flow->ct_ipv6_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_ipv6_dst, sizeof(struct in6_addr))) {
+        VLOG_DBG("flow->ct_ipv6_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->ipv6_label, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->ipv6_label not zero");
+    }
+
+    if (!is_all_zeros(&flow->nw_frag, sizeof(uint8_t))) {
+        VLOG_DBG("flow->nw_frag not zero");
+    }
+
+    if (!is_all_zeros(&flow->nw_tos, sizeof(uint8_t))) {
+        VLOG_DBG("flow->nw_tos not zero");
+    }
+
+    if (!is_all_zeros(&flow->nw_ttl, sizeof(uint8_t))) {
+        VLOG_DBG("flow->nw_ttl not zero");
+    }
+
+    if (!is_all_zeros(&flow->nw_proto, sizeof(uint8_t))) {
+        VLOG_DBG("flow->nw_proto not zero");
+    }
+
+    if (!is_all_zeros(&flow->nd_target, sizeof(struct in6_addr))) {
+        VLOG_DBG("flow->nd_target not zero");
+    }
+
+    if (!is_all_zeros(&flow->arp_sha, sizeof(struct eth_addr))) {
+        VLOG_DBG("flow->arp_sha not zero");
+    }
+
+    if (!is_all_zeros(&flow->arp_tha, sizeof(struct eth_addr))) {
+        VLOG_DBG("flow->arp_tha not zero");
+    }
+
+    if (!is_all_zeros(&flow->tcp_flags, sizeof(ovs_be16))) {
+        VLOG_DBG("flow->tcp_flags not zero");
+    }
+
+    if (!is_all_zeros(&flow->nsh, sizeof(struct ovs_key_nsh))) {
+        VLOG_DBG("flow->nsh not zero");
+    }
+
+    if (!is_all_zeros(&flow->tp_src, sizeof(ovs_be16))) {
+        VLOG_DBG("flow->tp_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->tp_dst, sizeof(ovs_be16))) {
+        VLOG_DBG("flow->tp_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_tp_src, sizeof(ovs_be16))) {
+        VLOG_DBG("flow->ct_tp_src not zero");
+    }
+
+    if (!is_all_zeros(&flow->ct_tp_dst, sizeof(ovs_be16))) {
+        VLOG_DBG("flow->ct_tp_dst not zero");
+    }
+
+    if (!is_all_zeros(&flow->igmp_group_ip4, sizeof(ovs_be32))) {
+        VLOG_DBG("flow->igmp_group_ip4 not zero");
+    }
+}
+
+
 static int
 parse_flow_match(struct netdev *netdev,
                  odp_port_t orig_in_port OVS_UNUSED,
@@ -1798,13 +1976,15 @@ add_output_action(struct netdev *netdev,
     port = nl_attr_get_odp_port(nla);
     outdev = netdev_ports_get(port, netdev->dpif_type);
     if (outdev == NULL) {
+        VLOG_DBG("dpif_type = %s", netdev->dpif_type);
         VLOG_DBG_RL(&rl, "Cannot find netdev for odp port %"PRIu32, port);
         return -1;
     }
+    bool k = netdev_flow_api_equals(netdev, outdev);
     if (!netdev_flow_api_equals(netdev, outdev) ||
         add_port_id_action(actions, outdev)) {
-        VLOG_DBG_RL(&rl, "%s: Output to port \'%s\' cannot be offloaded.",
-                    netdev_get_name(netdev), netdev_get_name(outdev));
+        VLOG_DBG_RL(&rl, "%s: Output to port \'%s\' cannot be offloaded.k=%d",
+                    netdev_get_name(netdev), netdev_get_name(outdev), k);
         ret = -1;
     }
     netdev_close(outdev);
@@ -2215,6 +2395,8 @@ parse_flow_actions(struct netdev *netdev,
                 return -1;
             }
 #endif
+        } else if (nl_attr_type(nla) == OVS_ACTION_ATTR_CT) {
+            VLOG_DBG("CT actions parse");
         } else {
             VLOG_DBG_RL(&rl, "Unsupported action type %d", nl_attr_type(nla));
             return -1;
@@ -2257,6 +2439,174 @@ out:
     return flow;
 }
 
+static int
+parse_ct_flow(struct netdev *netdev, struct match *match,
+              struct flow_patterns *patterns,
+              enum rte_flow_item_type type)
+{
+    uint16_t ct_state = match->flow.ct_state;
+    uint8_t proto = 0;
+    int port_id;
+    struct rte_flow_error error;
+
+    patterns->physdev = netdev;
+
+    if (ct_state != 34 && ct_state != 42) {
+        return 0;
+    }
+
+    // VLOG_DBG("ct state is %d", ct_state);
+    // Get dpdk port
+    port_id = netdev_dpdk_get_port_id(netdev);
+
+    int rc;
+
+    if (type == RTE_FLOW_ITEM_TYPE_FLEX) {
+        // insert a new ct entry
+        rc = rte_flow_insert_connection(0, match->flow.nw_src, match->flow.nw_dst,
+                                    match->flow.tp_src, match->flow.tp_dst, 1, &error);
+        if (rc != 0)
+        {
+            VLOG_DBG("Error 1: rc = %d error type %d error message: %s", rc, error.type,
+                error.message);
+        }
+        // rc = rte_flow_insert_connection(0, match->flow.nw_dst, match->flow.nw_src,
+        //                                 match->flow.tp_dst, match->flow.tp_src, 1, &error);
+        // if (rc != 0)
+        // {
+        //     VLOG_DBG("Error 2: rc = %d error type %d error message: %s", rc, error.type,
+        //         error.message);
+        // }
+        // VLOG_DBG("rte_flow_insert_connection(%d, %d, %d, %d, %d)", port_id, match->flow.nw_src,
+        //         match->flow.nw_dst,match->flow.tp_src, match->flow.tp_dst);
+    }
+    // return 0;
+
+    //  extract items for redirect actions
+    if (match->wc.masks.dl_type ||
+        !eth_addr_is_zero(match->wc.masks.dl_src) ||
+        !eth_addr_is_zero(match->wc.masks.dl_dst)) {
+        
+        struct rte_flow_item_eth *spec;
+
+        spec = xzalloc(sizeof *spec);
+
+        memcpy(&spec->dst, &match->flow.dl_dst, sizeof spec->dst);
+        memcpy(&spec->src, &match->flow.dl_src, sizeof spec->src);
+        spec->type = match->flow.dl_type;
+        spec->has_vlan = 0;
+
+        // VLOG_DBG("Add ETH");
+        add_flow_pattern(patterns, RTE_FLOW_ITEM_TYPE_ETH, spec, NULL, NULL);
+    }
+
+    if (match->flow.dl_type == htons(ETH_TYPE_IP)) {
+        struct rte_flow_item_ipv4 *spec, *mask, *last = NULL;
+
+        spec = xzalloc(sizeof *spec);
+        mask = xzalloc(sizeof *mask);
+
+        spec->hdr.type_of_service = match->flow.nw_tos;
+        spec->hdr.time_to_live    = match->flow.nw_ttl;
+        spec->hdr.next_proto_id   = match->flow.nw_proto;
+        spec->hdr.src_addr        = match->flow.nw_src;
+        spec->hdr.dst_addr        = match->flow.nw_dst;
+
+        // mask->hdr.type_of_service = match->wc.masks.nw_tos;
+        // mask->hdr.time_to_live    = match->wc.masks.nw_ttl;
+        // mask->hdr.next_proto_id   = match->wc.masks.nw_proto;
+        // mask->hdr.src_addr        = match->wc.masks.nw_src;
+        // mask->hdr.dst_addr        = match->wc.masks.nw_dst;
+        mask->hdr.type_of_service = match->wc.masks.nw_tos;
+        mask->hdr.time_to_live    = match->wc.masks.nw_ttl;
+        mask->hdr.next_proto_id   = UINT8_MAX;
+        mask->hdr.src_addr        = OVS_BE32_MAX;
+        mask->hdr.dst_addr        = OVS_BE32_MAX;
+
+        // VLOG_DBG("Add IPV4: tos %d ttl %d next proto %d src %d dst %d",
+        //          spec->hdr.type_of_service, spec->hdr.time_to_live, spec->hdr.next_proto_id,
+        //          spec->hdr.src_addr, spec->hdr.dst_addr);
+        // VLOG_DBG("Add mask IPV4: tos %d ttl %d next proto %d src %d dst %d",
+        //          mask->hdr.type_of_service, mask->hdr.time_to_live, mask->hdr.next_proto_id,
+        //          mask->hdr.src_addr, mask->hdr.dst_addr);
+        add_flow_pattern(patterns, RTE_FLOW_ITEM_TYPE_IPV4, spec, mask, last);
+
+        /* Save proto for L4 protocol setup. */
+        proto = spec->hdr.next_proto_id;
+        // VLOG_DBG("1 %d 2 %d proto %d", spec->hdr.next_proto_id, mask->hdr.next_proto_id,
+        //                                  proto);
+    }
+
+    if (proto == IPPROTO_TCP) {
+        struct rte_flow_item_tcp *spec, *mask;
+
+        spec = xzalloc(sizeof *spec);
+        mask = xzalloc(sizeof *mask);
+
+        spec->hdr.src_port  = match->flow.tp_src;
+        spec->hdr.dst_port  = match->flow.tp_dst;
+        spec->hdr.data_off  = ntohs(match->flow.tcp_flags) >> 8;
+        spec->hdr.tcp_flags = ntohs(match->flow.tcp_flags) & 0xff;
+
+        mask->hdr.src_port  = OVS_BE16_MAX;
+        mask->hdr.dst_port  = OVS_BE16_MAX;
+        mask->hdr.data_off  = ntohs(match->wc.masks.tcp_flags) >> 8;
+        mask->hdr.tcp_flags = ntohs(match->wc.masks.tcp_flags) & 0xff;
+        // VLOG_DBG("Add TCP");
+        add_flow_pattern(patterns, RTE_FLOW_ITEM_TYPE_TCP, spec, mask, NULL);
+    }
+
+    add_flow_pattern(patterns, type, NULL, NULL, NULL);
+    add_flow_pattern(patterns, RTE_FLOW_ITEM_TYPE_END, NULL, NULL, NULL);
+    return proto;
+}
+
+static int
+add_first_flow(struct netdev *netdev, struct match *match, struct flow_patterns *patterns2)
+{
+    struct flow_patterns patterns = {
+        .items = NULL,
+        .cnt = 0,
+        .s_tnl = DS_EMPTY_INITIALIZER,
+    };
+    struct flow_actions actions = {
+        .actions = NULL,
+        .cnt = 0,
+        .s_tnl = DS_EMPTY_INITIALIZER,
+    };
+    const struct rte_flow_attr attr = {
+        .ingress = 1,
+        .transfer = 1
+    };
+    struct rte_flow_error error;
+    int ret;
+    struct rte_flow *flow = NULL;
+    uint8_t proto = 0;
+
+    proto = parse_ct_flow(netdev, match, &patterns, RTE_FLOW_ITEM_TYPE_FLEX);
+    if (proto != IPPROTO_TCP) {
+        free_flow_patterns(&patterns);
+        return -1;
+    }
+    proto = parse_ct_flow(netdev, match, patterns2, RTE_FLOW_ITEM_TYPE_CONNTRACK);
+    if (proto != IPPROTO_TCP) {
+        free_flow_patterns(&patterns);
+        return -1;
+    }
+
+    add_flow_action(&actions, RTE_FLOW_ACTION_TYPE_VOID, NULL);
+    // add_count_action(&actions);
+    add_flow_action(&actions, RTE_FLOW_ACTION_TYPE_END, NULL);
+    flow = netdev_offload_dpdk_flow_create(netdev, &attr, &patterns, &actions, &error);
+    if (!flow)
+    {
+        VLOG_DBG("Failed to offload flow2");
+    }
+    free_flow_actions(&actions);
+    free_flow_patterns(&patterns);
+    return 0;
+}
+
 static struct ufid_to_rte_flow_data *
 netdev_offload_dpdk_add_flow(struct netdev *netdev,
                              struct match *match,
@@ -2273,12 +2623,22 @@ netdev_offload_dpdk_add_flow(struct netdev *netdev,
     struct ufid_to_rte_flow_data *flows_data = NULL;
     bool actions_offloaded = true;
     struct rte_flow *flow;
+    int rc;
 
-    if (parse_flow_match(netdev, info->orig_in_port, &patterns, match)) {
+    if (match->flow.ct_state == 34 || match->flow.ct_state == 42) {
+        rc = add_first_flow(netdev, match, &patterns);
+        if (rc != 0)
+            goto out;
+    } else if (parse_flow_match(netdev, info->orig_in_port, &patterns, match)) {
         VLOG_DBG_RL(&rl, "%s: matches of ufid "UUID_FMT" are not supported",
                     netdev_get_name(netdev), UUID_ARGS((struct uuid *) ufid));
         goto out;
     }
+    // if (parse_flow_match(netdev, info->orig_in_port, &patterns, match)) {
+    //     VLOG_DBG_RL(&rl, "%s: matches of ufid "UUID_FMT" are not supported",
+    //                 netdev_get_name(netdev), UUID_ARGS((struct uuid *) ufid));
+    //     goto out;
+    // }
 
     flow = netdev_offload_dpdk_actions(patterns.physdev, &patterns, nl_actions,
                                        actions_len);
@@ -2483,6 +2843,7 @@ netdev_offload_dpdk_flow_get(struct netdev *netdev,
                              struct ofpbuf *buf OVS_UNUSED)
 {
     struct rte_flow_query_count query = { .reset = 1 };
+    struct rte_flow_query_count query1 = { .reset = 1 };
     struct ufid_to_rte_flow_data *rte_flow_data;
     struct rte_flow_error error;
     int ret = 0;
@@ -2525,6 +2886,7 @@ netdev_offload_dpdk_flow_get(struct netdev *netdev,
     if (query.hits_set && query.hits) {
         rte_flow_data->stats.used = time_msec();
     }
+    VLOG_ERR("Stats: UFID "UUID_FMT" query.hits %ld query.bytes %ld", UUID_ARGS((struct uuid *) ufid), query.hits, query.bytes);
     memcpy(stats, &rte_flow_data->stats, sizeof *stats);
 out:
     ovs_mutex_unlock(&rte_flow_data->lock);

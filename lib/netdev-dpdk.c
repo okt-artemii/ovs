@@ -5421,7 +5421,7 @@ netdev_dpdk_rte_flow_create(struct netdev *netdev,
     struct rte_flow *flow;
     struct netdev_dpdk *dev = netdev_dpdk_cast(netdev);
 
-    flow = rte_flow_create(dev->port_id, attr, items, actions, error);
+    flow = rte_flow_create(0, attr, items, actions, error);
     return flow;
 }
 
@@ -5449,7 +5449,7 @@ netdev_dpdk_rte_flow_query_count(struct netdev *netdev,
     }
 
     dev = netdev_dpdk_cast(netdev);
-    ret = rte_flow_query(dev->port_id, rte_flow, actions, query, error);
+    ret = rte_flow_query(0, rte_flow, actions, query, error);
     return ret;
 }
 

@@ -2461,7 +2461,7 @@ parse_ct_flow(struct netdev *netdev, struct match *match,
 
     int rc;
 
-    if (type == RTE_FLOW_ITEM_TYPE_FLEX) {
+    if (type == RTE_FLOW_ITEM_TYPE_CONNTRACK) {
         // insert a new ct entry
         rc = rte_flow_insert_connection(0, match->flow.nw_src, match->flow.nw_dst,
                                     match->flow.tp_src, match->flow.tp_dst, 1, &error);
@@ -2562,48 +2562,49 @@ parse_ct_flow(struct netdev *netdev, struct match *match,
 }
 
 static int
-add_first_flow(struct netdev *netdev, struct match *match, struct flow_patterns *patterns2)
+add_first_flow(struct netdev *netdev, struct match *match,
+               struct flow_patterns *patterns2)
 {
-    struct flow_patterns patterns = {
-        .items = NULL,
-        .cnt = 0,
-        .s_tnl = DS_EMPTY_INITIALIZER,
-    };
-    struct flow_actions actions = {
-        .actions = NULL,
-        .cnt = 0,
-        .s_tnl = DS_EMPTY_INITIALIZER,
-    };
-    const struct rte_flow_attr attr = {
-        .ingress = 1,
-        .transfer = 1
-    };
-    struct rte_flow_error error;
-    int ret;
-    struct rte_flow *flow = NULL;
+    // struct flow_patterns patterns = {
+    //     .items = NULL,
+    //     .cnt = 0,
+    //     .s_tnl = DS_EMPTY_INITIALIZER,
+    // };
+    // struct flow_actions actions = {
+    //     .actions = NULL,
+    //     .cnt = 0,
+    //     .s_tnl = DS_EMPTY_INITIALIZER,
+    // };
+    // const struct rte_flow_attr attr = {
+    //     .ingress = 1,
+    //     .transfer = 1
+    // };
+    // struct rte_flow_error error;
+    // int ret;
+    // struct rte_flow *flow = NULL;
     uint8_t proto = 0;
 
-    proto = parse_ct_flow(netdev, match, &patterns, RTE_FLOW_ITEM_TYPE_FLEX);
-    if (proto != IPPROTO_TCP) {
-        free_flow_patterns(&patterns);
-        return -1;
-    }
+    // proto = parse_ct_flow(netdev, match, &patterns, RTE_FLOW_ITEM_TYPE_FLEX);
+    // if (proto != IPPROTO_TCP) {
+    //     free_flow_patterns(&patterns);
+    //     return -1;
+    // }
     proto = parse_ct_flow(netdev, match, patterns2, RTE_FLOW_ITEM_TYPE_CONNTRACK);
     if (proto != IPPROTO_TCP) {
-        free_flow_patterns(&patterns);
+        // free_flow_patterns(&patterns);
         return -1;
     }
 
-    add_flow_action(&actions, RTE_FLOW_ACTION_TYPE_VOID, NULL);
-    // add_count_action(&actions);
-    add_flow_action(&actions, RTE_FLOW_ACTION_TYPE_END, NULL);
-    flow = netdev_offload_dpdk_flow_create(netdev, &attr, &patterns, &actions, &error);
-    if (!flow)
-    {
-        VLOG_DBG("Failed to offload flow2");
-    }
-    free_flow_actions(&actions);
-    free_flow_patterns(&patterns);
+    // add_flow_action(&actions, RTE_FLOW_ACTION_TYPE_VOID, NULL);
+    // // add_count_action(&actions);
+    // add_flow_action(&actions, RTE_FLOW_ACTION_TYPE_END, NULL);
+    // flow = netdev_offload_dpdk_flow_create(netdev, &attr, &patterns, &actions, &error);
+    // if (!flow)
+    // {
+    //     VLOG_DBG("Failed to offload flow2");
+    // }
+    // free_flow_actions(&actions);
+    // free_flow_patterns(&patterns);
     return 0;
 }
 
